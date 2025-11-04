@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Conceptos Clave en Desarrollo Web y Apps</title>
+<style>
+  /* ------------------------------------------- */
+  /* --- KEYFRAMES PARA ANIMACIÓN FLOTANTE --- */
+  /* ------------------------------------------- */
+  @keyframes float {
+    0% { transform: translatey(0px); }
+    50% { transform: translatey(-15px); }
+    100% { transform: translatey(0px); }
+  }
+
+  /* ------------------------------------------- */
+  /* --- CAMBIOS SOLICITADOS EN EL BODY (FONDO) --- */
+  /* Degradado más azulado: Azul oscuro a Magenta suave */
+  /* ------------------------------------------- */
+  body {
+    /* Fondo degradado invertido: De azul oscuro (#3054a8) a magenta suave (#a033a8) */
+    background: #000;
+    background: linear-gradient(135deg, #3054a8 0%, #a033a8 100%);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 20px 0;
+    min-height: 100vh;
+  }
+
+  /* ------------------------------------------- */
+  /* --- AJUSTES DE TIPOGRAFÍA Y NEÓN (H1 MODIFICADO) --- */
+  /* ------------------------------------------- */
+  h1 {
+    /* Letra negra con sombra cian gruesa */
+    color: #000000;
+    text-align: center;
+    /* Sombra cian gruesa: múltiple para un efecto más denso */
+    text-shadow: 
+      0 0 5px #00e0ff, 
+      0 0 10px #00e0ff, 
+      0 0 15px #00e0ff, 
+      2px 2px 0 #00e0ff, 
+      -2px -2px 0 #00e0ff;
+    
+    margin-bottom: 40px;
+    font-size: clamp(2.5rem, 6vw, 4rem); /* Fuente responsiva más grande */
+    letter-spacing: 2px;
+    padding-top: 10px;
+    line-height: 1.2;
+    white-space: pre-wrap; /* Permite saltos de línea en el texto */
+
+    /* Animación flotante */
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  h2, .header span {
+    color: #00e0ff;
+    text-shadow: 0 0 10px #00e0ff;
+    margin-top: 1.5em;
+    margin-bottom: 0.4em;
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+  }
+  
+  h3 {
+    color: #ff00ff;
+    text-shadow: 0 0 7px #ff00ff;
+    margin-top: 1.2em;
+    margin-bottom: 0.2em;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+  }
+
+  /* ------------------------------------------- */
+  /* --- ACORDEÓN Y TARJETA --- */
+  /* ------------------------------------------- */
+  .accordion {
+    max-width: 900px;
+    margin: auto;
+    border-radius: 20px;
+    /* Mantenemos la sombra de caja dual */
+    box-shadow: 0 0 30px rgba(160, 51, 168, 0.7), 0 0 50px rgba(48, 84, 168, 0.5) inset;
+    overflow: hidden;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .item {
+    background: rgba(17, 0, 17, 0.8);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .item:last-child {
+    margin-bottom: 0;
+  }
+
+  .item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 25px #ff00ff;
+  }
+  .item.active {
+    background: #1a001a;
+  }
+
+  .header {
+    padding: 18px 25px;
+    font-size: 1.1rem;
+    color: #00e0ff;
+    text-shadow: 0 0 8px #00e0ff;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+  }
+
+  .header span {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .header svg {
+    width: 22px;
+    height: 22px;
+    fill: #00e0ff;
+    transition: transform 0.4s ease;
+  }
+
+  .item.active .header svg {
+    transform: rotate(180deg);
+  }
+
+  .content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 25px;
+    color: #d896d7;
+    font-size: 1rem;
+    line-height: 1.7;
+    text-shadow: 0 0 3px #d896d7;
+    background: #1a001a;
+    box-shadow: inset 0 0 10px #660066;
+    transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), padding 0.3s ease;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  .item.active .content {
+    padding: 15px 25px 30px 25px;
+    max-height: 1000px;
+  }
+
+  code {
+    background-color: #380038;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-family: 'Fira Code', monospace;
+    color: #ffc2ff;
+    font-weight: bold;
+    box-shadow: 0 0 5px #ffc2ff;
+  }
+
+  /* ------------------------------------------- */
+  /* --- FOOTER --- */
+  /* ------------------------------------------- */
+  footer {
+    max-width: 850px;
+    margin: 60px auto 20px auto;
+    padding: 20px 25px;
+    background: rgba(17, 17, 17, 0.7);
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 10px #00e0ff, 0 0 10px #ff00ff;
+    color: #fff;
+    font-size: 0.95rem;
+    text-shadow: 0 0 6px #00e0ff;
+    letter-spacing: 1px;
+    line-height: 1.5;
+  }
+  footer a {
+    color: #00e0ff;
+    text-decoration: none;
+    font-weight: 700;
+    text-shadow: 0 0 8px #00e0ff;
+    margin: 0 8px;
+    transition: color 0.3s, text-shadow 0.3s;
+  }
+  footer a:hover {
+    color: #ff00ff;
+    text-shadow: 0 0 12px #ff00ff;
+  }
+
+  /* ------------------------------------------- */
+  /* --- RESPONSIVE / MOBILE (Ajustes finos) --- */
+  /* ------------------------------------------- */
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+    .accordion {
+      max-width: 95%;
+      padding: 5px;
+      border-radius: 15px;
+    }
+    .header {
+      padding: 15px 20px;
+      font-size: 1rem;
+    }
+    .content {
+      padding: 0 20px;
+      font-size: 0.9rem;
+    }
+    .item.active .content {
+      padding: 15px 20px 20px 20px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.85rem;
+      padding: 15px 20px;
+    }
+    footer a {
+      display: block;
+      margin: 5px 0;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<h1>Conceptos Claves
+en Desarrollo Web y Apps</h1>
+
+<div class="accordion">
+  <div class="item">
+    <div class="header"><span>🗂️ HTML</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Lenguaje de marcado que estructura el contenido de una página web.<br/>
+      Ejemplo: <code>&lt;h1&gt;Título&lt;/h1&gt;</code> crea un encabezado.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🎨 CSS</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Lenguaje para diseñar apariencia: colores, fuentes, layouts.<br/>
+      Ejemplo: <code>body { background-color: lightblue; }</code>.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>💻 JavaScript (JS)</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Lenguaje que añade interactividad a la web.<br/>
+      Ejemplo: <code>alert('Hola!');</code> muestra mensaje emergente.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🖥️ Frontend</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Parte visible del sitio web o app que usa el usuario.<br/>
+      Ejemplo: botones, menús, animaciones.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🗄️ Backend</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Lógica y datos que funcionan en el servidor.<br/>
+      Ejemplo: validación de usuario, base de datos.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🔗 API</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Interfaz para que aplicaciones diferentes se comuniquen.<br/>
+      Ejemplo: usar Google Maps en una app.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🤖 IA (Inteligencia Artificial)</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Sistemas que imitan inteligencia humana.<br/>
+      Ejemplo: reconocimiento facial.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🚀 PWA (Progressive Web App)</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Aplicación web con funcionalidades similares a apps nativas.<br/>
+      Ejemplo: Twitter Lite funciona sin conexión.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>📚 Base de Datos</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Sistema para almacenar y gestionar información.<br/>
+      Ejemplo: registros de usuarios o productos.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🌐 JSON</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Formato de texto para intercambiar datos.<br/>
+      Ejemplo: <code>{"nombre": "Ana", "edad": 30}</code>.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🎧 Vibecoding</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Técnica que mezcla estado emocional y creatividad para codificación fluida.<br/>
+      Ejemplo: Programar con música que favorece concentración.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>⚙️ Compilar</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Proceso de transformar código fuente en ejecutable.<br/>
+      Ejemplo: Convertir código C++ en programa usable.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🎛️ UI (User Interface)</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Elementos visuales y controles para interacción.<br/>
+      Ejemplo: botones, menús, sliders y campos de texto.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>😊 UX (User Experience)</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Percepción y satisfacción global del usuario.<br/>
+      Ejemplo: una web fácil, rápida y agradable de usar.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🌩️ Hosting</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Servicio para alojar y publicar sitios web en Internet.<br/>
+      Ejemplo: DigitalOcean, HostGator, Vercel.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🌏 Dominio</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Nombre único para identificar un sitio en la web.<br/>
+      Ejemplo: www.ejemplo.com.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🧩 Framework</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Conjunto de herramientas y buenas prácticas para desarrollar más fácil y rápido.<br/>
+      Ejemplo: React, Angular, Laravel.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>📰 CMS</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Plataforma para crear y gestionar contenido web sin programar.<br/>
+      Ejemplo: Wordpress, Joomla.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🔄 DevOps</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Prácticas para unir desarrollo y operaciones, automatizando lanzamientos de software.<br/>
+      Ejemplo: uso de pipelines y despliegues automáticos.
+    </div>
+  </div>
+  <div class="item">
+    <div class="header"><span>🎯 Full Stack</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="content">
+      Persona o enfoque que domina tanto el frontend como el backend.<br/>
+      Ejemplo: programador que diseña la interfaz y la base de datos.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="https://www.dataflowia.com" target="_blank">www.dataflowia.com</a> | 
+  <a href="mailto:contacto@dataflowia.com">contacto@dataflowia.com</a> <br>
+  &copy; 2025 todos los derechos reservados
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.item');
+  items.forEach(item => {
+   const header = item.querySelector('.header');
+   header.addEventListener('click', () => {
+     items.forEach(i => {
+       if(i !== item) {
+         i.classList.remove('active');
+         // Restablecer maxHeight para cerrar el contenido
+         i.querySelector('.content').style.maxHeight = null;
+       }
+     });
+     item.classList.toggle('active');
+     const content = item.querySelector('.content');
+     if(item.classList.contains('active')) {
+       // Establecer un valor alto de maxHeight para que la transición de CSS funcione
+       content.style.maxHeight = content.scrollHeight + 50 + "px"; 
+     } else {
+       content.style.maxHeight = null;
+     }
+   });
+  });
+</script>
+
+</body>
+</html>
